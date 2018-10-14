@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter } from '@angular/core';
+import {Component } from '@angular/core';
 import { WebService } from './web.service';
 
 
@@ -7,23 +7,25 @@ import { WebService } from './web.service';
     template: `
             <mat-card class="card">
                 <mat-card-content>
-                    <mat-form-field>
-                        <input matInput placeholder="Name" [(ngModel)]="message.owner">
-                    </mat-form-field><br />
-                    <mat-form-field>
-                        <textarea matInput placeholder="Message" [(ngModel)]="message.text"></textarea>
-                    </mat-form-field>
-                    <mat-card-actions>
-                        <button mat-button color="primary" (click)="post()">Post</button>
-                    </mat-card-actions>
+                    <div class='form'>
+                        <mat-form-field class="form-full">
+                            <input matInput placeholder="Name" [(ngModel)]="message.owner">
+                        </mat-form-field>
+                        <mat-form-field class="form-full">
+                            <textarea matInput placeholder="Message" [(ngModel)]="message.text"></textarea>
+                        </mat-form-field>
+                        <mat-card-actions>
+                            <button mat-button color="primary" (click)="post()">Post</button>
+                        </mat-card-actions>
+                    </div>
                 </mat-card-content>
             </mat-card>
         `
-})
+    }
+)
 
 export class NewMessageComponent {
 
-    @Output() onPost = new EventEmitter();
     
     message = {
         owner:  "",
@@ -37,6 +39,5 @@ export class NewMessageComponent {
 
     async post() {
         await this.webService.postMessage(this.message);
-        this.onPost.emit();
     }
 }

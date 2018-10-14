@@ -1,22 +1,16 @@
-import { Component, ViewChild } from '@angular/core';
-import { MessagesComponent } from './messages.component';
-import { NewMessageComponent } from './new-message.component';
-
+import { Component } from '@angular/core';
+import { NavComponent } from './nav.component';
+import { HomeComponent } from './home.component';
 @Component({
   selector: 'app-root',
-  template: `<h1>{{ title }}</h1>
-              <new-message (onPost)="messagePosted()"></new-message>
-              <messages #messagesComponent></messages>`,
+  template: `
+      <nav></nav>
+      <router-outlet></router-outlet>
+  `,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   
-  @ViewChild('messagesComponent') messagesComponent: MessagesComponent;
+  constructor() {}
 
-  title = 'Message Board';
-
-
-  messagePosted() {
-    this.messagesComponent.getMessages();
-  }
 }
